@@ -1,12 +1,12 @@
 import UserRepository from "../../useCase/interfaces/userRepository";
-import { IUser } from "../../domain/user"; 
+import { IUser,User } from "../../domain/user"; 
 import userModel from "../database/userModel";
 
 class userRepository implements UserRepository{
-async findByEmail(email:string):Promise<IUser | null>{
+async findByEmail(email:string):Promise<User | null>{
     try {
         const user = await userModel.findOne({email:email})
-            return user as IUser | null        
+            return user as User | null
     } catch (error) {
         console.log(error)
         return null

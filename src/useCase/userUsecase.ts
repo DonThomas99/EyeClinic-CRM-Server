@@ -1,14 +1,20 @@
-import { IUser } from "../domain/user";
+import { IUser, User, userLogin } from "../domain/user";
 import UserRepository from "../infrastructure/repositories/userRepository";
 import Encrypt from "../infrastructure/utils/hashPassword"
+import JwtCreate from "../infrastructure/utils/jwtCreate";
 
 class userUsecase{
     private UserRepository:UserRepository
+        private JwtCreate:JwtCreate
     private Encrypt:Encrypt
-    constructor(UserRepository:UserRepository,Encrypt:Encrypt){
+    constructor(UserRepository:UserRepository,Encrypt:Encrypt,jwtCreate:JwtCreate){
+        this.JwtCreate =jwtCreate
         this.UserRepository = UserRepository
         this.Encrypt = Encrypt
     }
+
+//user registration and access control methods
+    
     async signUp(user:IUser){
         try {
             const existingUser = await this.UserRepository.findByEmail(user.email)
@@ -43,6 +49,41 @@ class userUsecase{
             }
         }
     }
+
+    async login(userData:userLogin){
+        try {
+            let token =''
+            const user = await this.UserRepository.findByEmail(userData.email)
+            if(user){
+                if(user.id){
+
+                     token  = this.JwtCreate.createJwt(user.id)
+                }
+                return {
+                    status:200,
+                    message:'Successfully logged in!',
+                    data:user,
+                    token:token
+                }
+            }else{
+                return {
+                    status:401,
+                    message:'Error Fetching details',
+                    data:null,
+                    token:null
+                }
+            }
+        } catch (error) {
+            console.log(error)
+            return {
+                status:401,
+                message:'Error Fetching details',
+                data:null,
+                token:null
+            }
+        }
+    }
+
 }
 
 export default userUsecase

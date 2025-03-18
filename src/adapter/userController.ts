@@ -14,5 +14,10 @@ class userController {
         res.status(response.status).json({message:response.message})
 
     }
+    async login(req:Request,res:Response){
+        const userData = req.body
+        const response = await this.userUsecase.login(userData)
+        res.status(response.status).json({message:response.message,data:response.data,token:response.token})
+    }
 }
 export default userController

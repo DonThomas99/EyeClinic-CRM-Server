@@ -13,3 +13,8 @@ export interface IUser{
     password:string,
     mobile:string,
 }
+
+export interface userLogin {
+email:string;
+password:string;
+}
