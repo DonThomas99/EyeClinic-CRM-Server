@@ -1,4 +1,4 @@
-interface User{
+export interface User{
 id?:string,
 name?:string,
 mobile?:string,
@@ -7,4 +7,9 @@ password?:string,
 isBlocked?:boolean,
 }
 
-export default User
+export interface IUser{
+    name:string,
+    email:string,
+    password:string,
+    mobile:string,
+}
