@@ -10,6 +10,10 @@ async findByEmail(email:string):Promise<Admin |null>{
     const admin = await AdminModel.findOne({email:email})
     return admin
 }
+async customerList(){
+    const customerList = await userModel.find({})
+        return customerList
+}
 }
 
 export default adminRepository

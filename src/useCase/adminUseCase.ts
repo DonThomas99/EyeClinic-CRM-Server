@@ -49,6 +49,33 @@ async adminLogin(adminData:IAdmin){
     }
 }
 
+async customerList(){
+    try {
+        const customerList = await this.adminRepository.customerList()
+        
+        if(customerList.length  > 0){
+            return {
+                status:200,
+                message:'Successfully fetched customer list',
+                data:customerList
+            }
+        }else{
+            return {
+                status:200,
+                message:'Empty customer list',
+                data:null
+            }
+        }
+    } catch (error) {
+        console.log(error)
+        return {
+            status:500,
+            message:'Error Fetching data. Try again details!',
+            data:null
+        }
+    }
+}
+
 }
 
 export default adminUsecase
