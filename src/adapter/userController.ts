@@ -7,6 +7,7 @@ class userController {
     constructor(userUsecase:userUsecase){
         this.userUsecase = userUsecase;
     }
+    //Authorization and Authentiacation of User
     async signUp(req:Request,res:Response){
         const user = req.body
         const response = await this.userUsecase.signUp(user)
@@ -19,5 +20,15 @@ class userController {
         const response = await this.userUsecase.login(userData)
         res.status(response.status).json({message:response.message,data:response.data,token:response.token})
     }
+
+    //User Management Routes
+    async customerList(req:Request, res:Response){
+        try {
+          const response = await this.userUsecase.fetchUsers()
+          res.status(response.status).json({customers:response.data,message:response.message})
+        } catch (error) {
+          console.log(error)
+        }
+      }
 }
 export default userController

@@ -23,6 +23,15 @@ try {
 }
 }
 
+async fetchAllUsers(){
+    try {
+        const users = await userModel.find({})
+        return users
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 
 
 }

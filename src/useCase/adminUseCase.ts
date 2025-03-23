@@ -2,12 +2,12 @@ import { IAdmin,Admin } from "../domain/admin";
 import JwtCreate from "../infrastructure/utils/jwtCreate";
 import adminRepository from "../infrastructure/repositories/adminRepository";
 
+
 class adminUsecase{
     
     private adminRepository:adminRepository
     private JwtCreate:JwtCreate
 constructor(adminRepository:adminRepository,JwtCreate:JwtCreate){
-
 this.adminRepository = adminRepository
 this.JwtCreate = JwtCreate
 }
@@ -22,57 +22,15 @@ async adminLogin(adminData:IAdmin){
         }
         else{
             return {
-                status:404,
-                message:'Admin Not Found'
-            }
+                status:404,message:'Admin Not Found'}
         }
             if(adminData.password == admin.password){
-                console.log('here')
-                return {
-                    status:200,
-                    data:token,
-                    message:'Successfully Logged in'
-                }
+                return {status:200,data:token,message:'Successfully Logged in'}
             }else{
-                return{
-                    status:401,
-                    data:null,
-                    message:'Wrong password'
-                }
+                return{status:401,data:null,message:'Wrong password'}
             }
     }else{
-        return {
-            status:401,
-            data:null,
-            message:"Invalid credentials"
-        }
-    }
-}
-
-async customerList(){
-    try {
-        const customerList = await this.adminRepository.customerList()
-        
-        if(customerList.length  > 0){
-            return {
-                status:200,
-                message:'Successfully fetched customer list',
-                data:customerList
-            }
-        }else{
-            return {
-                status:200,
-                message:'Empty customer list',
-                data:null
-            }
-        }
-    } catch (error) {
-        console.log(error)
-        return {
-            status:500,
-            message:'Error Fetching data. Try again details!',
-            data:null
-        }
+        return {status:401,data:null,message:"Invalid credentials"}
     }
 }
 

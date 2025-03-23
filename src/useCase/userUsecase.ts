@@ -84,6 +84,32 @@ class userUsecase{
         }
     }
 
+    async fetchUsers(){
+        try {
+            const users = await this.UserRepository.fetchAllUsers()
+            if(users && users.length > 0){
+                return {
+                    status:200,
+                    data:users,
+                    message:'Successfully fetched users'
+                }
+            }else{
+                return {
+                    status:200,
+                    data:null,
+                    message:'No users found'
+                }
+            }
+        } catch (error) {
+            console.log(error)
+            return {
+                status:500,
+                message:'Error Fetching data. Try again details!',
+                data:null
+            }
+        }
+    }
+
 }
 
 export default userUsecase
