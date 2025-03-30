@@ -1,5 +1,5 @@
 export interface category {
-name:string
+categoryName:string
 }
 
 export interface Icategory{

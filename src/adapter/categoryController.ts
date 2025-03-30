@@ -18,9 +18,9 @@ class CategoryController {
 
     async addCategory(req: Request, res: Response){
         try {
-            const categoryData = req.body;
+            const categoryData = req.body;            
             const category = await this.categoryUseCase.addCategory(categoryData);
-            res.status(category.status).json({status: category.status, message: category.message});
+            res.status(category.status).json({status: category.status, message: category.message,data:category.data});
         } catch (error) {
             console.log(error);
             res.status(500).json({status: 500, message: 'Internal Server Error'});

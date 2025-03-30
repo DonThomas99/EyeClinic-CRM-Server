@@ -11,7 +11,6 @@ const mongoOptions = {
 }
 
 const connectDB = async ()=>{
-    console.log('hee');
    return new Promise((resolve,reject)=>{
     mongoose.connect(MONGO_URI,mongoOptions)
     .then((conn)=>{

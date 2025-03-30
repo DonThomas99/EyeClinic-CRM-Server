@@ -1,4 +1,4 @@
-import { category } from "../domain/category";
+import { category, Icategory } from "../domain/category";
 import categoryRepository from "../infrastructure/repositories/categoryRepository";
 
 
@@ -35,11 +35,18 @@ async getCategory(){
 
 async addCategory(category:category){
     try {
-     const status =  await this.categoryRepository.addCategory(category)
+        const isExisting = await this.categoryRepository.searchCategory(category.categoryName)
+        let status:Icategory | false
+        if(isExisting){
+            status = false
+        }else{
+            status =  await this.categoryRepository.addCategory(category.categoryName) as Icategory
+        }
      if(status){
         return {
             status:201,
-            message:'Category added successfully'
+            message:'Category added successfully',
+            data:status
         }
      }else{
         return {
