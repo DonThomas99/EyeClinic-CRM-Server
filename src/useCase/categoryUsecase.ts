@@ -63,5 +63,37 @@ async addCategory(category:category){
     }
 }
 
+async toggleBlock(categoryId:string){
+    try {
+        const isExisting = await this.categoryRepository.getCategory(categoryId)
+        if(isExisting){
+            const response = await this.categoryRepository.toggleBlock(categoryId)
+            if(response){
+                return {
+                    status:200,
+                    message:'Category toggled successfully',
+                }
+            }else{
+                return {
+                    status:500,
+                    message:'Failed to toggle block'
+                }
+            }
+        }else{
+            return {
+                status:404,
+                message:'Category not found'
+            }
+        }
+        
+    } catch (error) {
+        console.log(error);
+        return {
+            status:500,
+            message:'Failed to toggle block'
+        }
+    }
+}
+
 }
 export default CategoryUsecase

@@ -27,6 +27,17 @@ class CategoryController {
         }
     }
 
+    async toggleBlock(req:Request,res:Response){
+        try {
+            const {categoryId} = req.body
+            const response = await this.categoryUseCase.toggleBlock(categoryId)
+            res.status(200).json({message:response.message})
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({status:500,message:'Internal Server Error'})
+        }
+    }
+
 }
 
 export default CategoryController;
