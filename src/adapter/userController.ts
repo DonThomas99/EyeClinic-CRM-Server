@@ -30,5 +30,15 @@ class userController {
           console.log(error)
         }
       }
+
+    async toggleBlockStatus(req:Request, res:Response){
+      try {
+        const {userEmail} = req.body
+        const response = await this.userUsecase.toggleBlockStatus(userEmail)
+        res.status(response.status).json({message:response.message})
+      } catch (error) {
+        console.log(error)
+      }
+    } 
 }
 export default userController

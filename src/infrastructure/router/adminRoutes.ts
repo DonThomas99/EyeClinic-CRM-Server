@@ -33,6 +33,7 @@ adminRoutes.post('/login',(req:Request,res)=>{Admincontroller.adminLogin(req,res
 
 //customer management routes
 adminRoutes.get('/customers',(req:Request,res)=>{UserController.customerList(req,res)})
+adminRoutes.put('/customers',(req:Request,res)=>{UserController.toggleBlockStatus(req,res)})
 
 //category management routes
 adminRoutes.get('/category',(req:Request,res)=>{categoryController.getCategory(req,res)})

@@ -110,6 +110,38 @@ class userUsecase{
         }
     }
 
+    async toggleBlockStatus(userEmail:string){
+        try {
+            const isExisting = await this.UserRepository.findByEmail(userEmail)
+            if(isExisting){
+                const response = await this.UserRepository.toggleBlock(userEmail)
+                if(response){
+                    return {
+                        status:200,
+                        message:'User status toggled successfully',
+                    }
+                }else{
+                    return {
+                        status:500,
+                        message:'Failed to toggle block'
+                    }
+                }
+            }else{
+                return {
+                    status:404,
+                    message:'Category not found'
+                }
+            }
+            
+        } catch (error) {
+            console.log(error);
+            return {
+                status:500,
+                message:'Failed to toggle block'
+            }
+        }
+    }
+
 }
 
 export default userUsecase
