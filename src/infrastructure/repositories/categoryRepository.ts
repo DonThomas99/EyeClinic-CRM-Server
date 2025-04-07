@@ -27,9 +27,8 @@ class categoryRepository{
         }
     }
 
-async addCategory(categoryName:string){
+async addCategory(categoryName:string){ 
 try {
-    console.log(categoryName);
     const category = new categoryModel({name:categoryName})
     const save =   await category.save()
     if(save){

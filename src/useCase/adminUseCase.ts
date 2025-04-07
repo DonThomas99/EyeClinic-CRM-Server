@@ -15,7 +15,6 @@ this.JwtCreate = JwtCreate
 async adminLogin(adminData:IAdmin){
     const admin:Admin |null = await this.adminRepository.findByEmail(adminData.email)
     let token:string =''
-    console.log(admin);
     if(admin){
         if(admin.id){
              token =  this.JwtCreate.createJwt(admin.id)
