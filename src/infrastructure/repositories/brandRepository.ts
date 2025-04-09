@@ -6,7 +6,7 @@ class brandRepository{
 
     async addBrand(brand:brand){
         try {
-            const newBrand = new brandModel({name:brand.name, image:brand.image})
+            const newBrand = new brandModel({name:brand.brandName})
             const save = await newBrand.save()
             return save as Obrand | false
         } catch (error) {
@@ -17,11 +17,16 @@ class brandRepository{
     
     async toggleBlock(brandId:string){
         try {
-            const brand = await brandModel.findOne({id:brandId})
-            if(!brand)return null
-            brand.isBlocked = !brand.isBlocked
-            const status = await brand.save() 
+            const brand = await brandModel.findOne({_id:brandId})
+            console.log(brand);
+            if(brand){
+                console.log(brand.isBlocked);
+                brand.isBlocked = !brand.isBlocked
+                const status = await brand.save() 
                 return status 
+            }else{
+                return null
+            }
         } catch (error) {
             console.log(error);
             return false
@@ -30,7 +35,7 @@ class brandRepository{
 
     async fetchBrand(brandId:string){
         try {
-            const brand = brandModel.findById({id:brandId})
+            const brand = await brandModel.findById({_id:brandId})
             return brand  
         } catch (error) {
             console.log(error);
@@ -54,7 +59,7 @@ class brandRepository{
 
     async fetchAll(){
         try {
-    const brands = brandModel.find({})
+    const brands = await brandModel.find({})
     return brands            
         } catch (error) {
             console.log(error);

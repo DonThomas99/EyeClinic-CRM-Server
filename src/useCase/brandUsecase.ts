@@ -32,7 +32,7 @@ class brandUsecase{
 
     async addBrand(brand:brand){
         try {
-            const brandExisting = await this.brandRepository.fetchBrandByName(brand.name)
+            const brandExisting = await this.brandRepository.fetchBrandByName(brand.brandName)
             let save:Obrand | false
             if(!brandExisting){
                  save = await this.brandRepository.addBrand(brand)

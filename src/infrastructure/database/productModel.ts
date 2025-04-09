@@ -15,7 +15,8 @@ const productSchema:Schema = new Schema({
         maxitems:4
     },
     brand:{
-        type:String,
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'brand',
         required:true
     },
     price:{

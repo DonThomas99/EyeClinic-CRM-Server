@@ -21,6 +21,7 @@ class BrandController{
         try {
             let brand:brand
             brand = req.body
+            console.log(brand);
             const response = await this.brandUsecase.addBrand(brand)
             res.status(response.status).json({message:response.message,data:response.data})
         } catch (error) {
@@ -31,7 +32,7 @@ class BrandController{
 
     async toggleBlock(req:Request, res:Response){
         try {
-            const brandId = req.body
+            const brandId = req.body.brandId
             const response =  await this.brandUsecase.toggleBlock(brandId)
             res.status(response.status).json({message:response.message})
         } catch (error) {

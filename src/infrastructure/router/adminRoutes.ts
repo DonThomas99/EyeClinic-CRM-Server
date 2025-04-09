@@ -58,6 +58,7 @@ adminRoutes.put('/category',(req:Request,res)=>{categoryController.toggleBlock(r
 const brandRepo = new brandRepository()
 const brandUseCase = new brandUsecase(brandRepo)
 const brandController    = new BrandController(brandUseCase)
+
 adminRoutes.get('/brand',(req:Request,res)=>{brandController.getBrand(req,res)})
 adminRoutes.post('/brand',(req:Request,res)=>{brandController.addBrand(req,res)})
 adminRoutes.put('/brand',(req:Request,res)=>{brandController.toggleBlock(req,res)})
