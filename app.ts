@@ -9,6 +9,7 @@ import cookieParser from 'cookie-parser';
 import session,{ SessionOptions } from 'express-session';
 import adminRoutes from './src/infrastructure/router/adminRoutes';
 import userRoutes from './src/infrastructure/router/userRoutes';
+import productRoutes from './src/infrastructure/router/productRoutes';
 
 
 dotenv.config()
@@ -48,6 +49,7 @@ server.listen(PORT, () => {
 
 app.use('/admin',adminRoutes)
 app.use('/user',userRoutes)
+app.use('/product',productRoutes)
 
 server.on('error',(error)=>{
     console.error('server error: ', error);

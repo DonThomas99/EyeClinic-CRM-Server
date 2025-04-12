@@ -1,12 +1,9 @@
 import express, {Request} from 'express';
-const router = express.Router()
-
 import adminRepository from '../repositories/adminRepository';
 import adminController from '../../adapter/adminController';
 import userController from '../../adapter/userController';
 import adminUsecase from '../../useCase/adminUseCase';
 import JwtCreate from '../utils/jwtCreate';
-import productRepository from '../repositories/productRepository';
 import userUsecase from '../../useCase/userUsecase';
 import userRepository from '../repositories/userRepository';
 import Encrypt from '../utils/hashPassword';
@@ -51,8 +48,6 @@ adminRoutes.get('/category',(req:Request,res)=>{categoryController.getCategory(r
 adminRoutes.post('/category',(req:Request,res)=>{categoryController.addCategory(req,res)})
 adminRoutes.put('/category',(req:Request,res)=>{categoryController.toggleBlock(req,res)})
 
-//Product Management Routes
-
 //Brand Management Routes
 
 const brandRepo = new brandRepository()
@@ -62,5 +57,7 @@ const brandController    = new BrandController(brandUseCase)
 adminRoutes.get('/brand',(req:Request,res)=>{brandController.getBrand(req,res)})
 adminRoutes.post('/brand',(req:Request,res)=>{brandController.addBrand(req,res)})
 adminRoutes.put('/brand',(req:Request,res)=>{brandController.toggleBlock(req,res)})
+
+
 
 export default adminRoutes
