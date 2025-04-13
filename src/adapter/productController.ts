@@ -33,7 +33,9 @@ class ProductController {
 
       async toggleBlock(req:Request,res:Response){
         try {
-          
+          const productId = req.body.productId
+          const response = await this.productUsecase.toggleBlock(productId)
+          res.status(response.status).json({message:response.message})
         } catch (error) {
           console.log(error);
         }

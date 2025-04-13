@@ -3,7 +3,6 @@ import multer from 'multer';
 // In-memory storage
 const storage = multer.memoryStorage();
 
-console.log('multer');
 const upload = multer({
   storage: storage,
   limits: {

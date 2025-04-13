@@ -98,6 +98,31 @@ class ProductUsecase{
             }
         }
     }
+
+    async toggleBlock(productId:string){
+        try {
+        const isExisting = await this.productRepository.fetchProductById(productId)
+        if(isExisting){
+        await this.productRepository.updateProduct(productId,{isBlocked:!isExisting.isBlocked}) 
+            return {
+                status:200,
+                message:'Product Status toggled Successfully'
+                   }
+        }   else{
+            return {
+                status:404,
+                message:'Error Fetching'
+            }
+        } 
+        } catch (error) {
+            console.log(error);
+            return{
+                status:500,
+                message:"Error Toggling Status of product"
+            }
+        }
+    }
+
 }
 
 export default ProductUsecase;

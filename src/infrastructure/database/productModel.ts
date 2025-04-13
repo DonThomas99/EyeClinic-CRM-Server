@@ -32,6 +32,10 @@ const productSchema: Schema = new Schema({
     description: {
         type: String,
         required: true
+    },
+    isBlocked:{
+        type:Boolean,
+        default:false
     }
 }, { timestamps: true });
 

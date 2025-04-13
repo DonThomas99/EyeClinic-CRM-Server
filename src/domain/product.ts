@@ -9,6 +9,7 @@ export interface IProduct extends Document {
   price: number;
   stock: number;
   description: string;
+  isBlocked:boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -19,6 +20,7 @@ export interface product{
   price: number;
   stock: number;
   description: string;
+  islocked:boolean
 }
 
 export interface ProductResponse {

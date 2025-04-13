@@ -5,6 +5,16 @@ import productRepository from "../../useCase/interfaces/productRepository";
 class ProductRepository implements productRepository {
     constructor(){}
 
+    async fetchProductById(productId:string){
+      try {
+        const product = await productModel.findOne({_id:productId})
+        return product
+      } catch (error) {
+        console.log(error);
+        return null
+      }
+    }
+
     async addProducts(products: product, files: string[]) {
         try {
           const document = {
@@ -53,6 +63,19 @@ class ProductRepository implements productRepository {
             console.log(error);
             return null
         }
+    }
+
+    async updateProduct(productId:string, updatedData:Partial<IProduct>){
+      try {
+    const updatedProduct = await productModel.findByIdAndUpdate(
+      productId,
+      {$set:updatedData}
+    )
+    return updatedProduct
+      } catch (error) {
+        console.log(error);
+        return null
+      }
     }
 
 }
