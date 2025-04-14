@@ -123,6 +123,24 @@ class ProductUsecase{
         }
     }
 
+    async updateProduct(productId:string, productData:Partial<IProduct>){
+        try {
+            const update = await this.productRepository.updateProduct(productId,productData)
+            
+                return {
+                    status:200,
+                    message:"Successfully Updated Product Details"
+                }
+            
+        } catch (error) {
+            console.log(error);
+            return {
+                status:500,
+                message:'Error Updating Product'
+            }
+        }
+    }
+
 }
 
 export default ProductUsecase;

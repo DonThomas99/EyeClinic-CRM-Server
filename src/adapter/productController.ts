@@ -40,6 +40,16 @@ class ProductController {
           console.log(error);
         }
       }
+
+      async updateProduct(req:Request,res:Response){
+        try {
+          const {productId, productData} = req.body
+          const response = await this.productUsecase.updateProduct(productId,productData)
+        } catch (error) {
+          console.log(error);
+          res.status(500).json({message:'Error Updating Product'})
+        }
+      }
     
 }
 

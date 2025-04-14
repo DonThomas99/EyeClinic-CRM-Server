@@ -16,5 +16,6 @@ const productController = new ProductController(productUseCase)
 productRouter.get('/product',(req:Request,res)=>{productController.getProducts(req,res)})
 productRouter.post('/product',Multer,(req:Request,res)=>{productController.addProduct(req,res)})
 productRouter.put('/product',(req:Request,res)=>{productController.toggleBlock(req,res)})
+productRouter.patch('/product',(req:Request,res)=>{productController.updateProduct(req,res)})
 
 export default productRouter
