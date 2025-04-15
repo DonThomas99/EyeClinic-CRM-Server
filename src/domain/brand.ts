@@ -1,9 +1,9 @@
 export interface brand {
-brandName:string,
+name:string,
 // image:string
 }
 export interface Obrand{
     id:string,
-    // image:string,
+    name:string,
     isBlocked:boolean
 }

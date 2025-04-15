@@ -47,6 +47,7 @@ const categoryController = new CategoryController(categoryUsecase)
 adminRoutes.get('/category',(req:Request,res)=>{categoryController.getCategory(req,res)})
 adminRoutes.post('/category',(req:Request,res)=>{categoryController.addCategory(req,res)})
 adminRoutes.put('/category',(req:Request,res)=>{categoryController.toggleBlock(req,res)})
+adminRoutes.patch('/category',(req:Request,res)=>{categoryController})
 
 //Brand Management Routes
 

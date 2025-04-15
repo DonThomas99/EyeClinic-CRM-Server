@@ -40,5 +40,16 @@ class BrandController{
             res.status(500).json({message:'Error Toggling Status'})
         }
     }
+
+    async update(req:Request, res:Response){
+        try {
+            const {brandId,brandData } = req.body
+            const response = await this.brandUsecase.updateBrand(brandId,brandData)
+            res.status(response.status).json({message:response.message})
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({message:"Error Updating Product"})
+        }
+    }
 }
 export default BrandController

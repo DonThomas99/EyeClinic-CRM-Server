@@ -32,7 +32,7 @@ class brandUsecase{
 
     async addBrand(brand:brand){
         try {
-            const brandExisting = await this.brandRepository.fetchBrandByName(brand.brandName)
+            const brandExisting = await this.brandRepository.fetchBrandByName(brand.name)
             let save:Obrand | false
             if(!brandExisting){
                  save = await this.brandRepository.addBrand(brand)
@@ -69,18 +69,11 @@ class brandUsecase{
         try {
             const brandExisting = await this.brandRepository.fetchBrand(brandId)
             if(brandExisting){
-                const toggle = await this.brandRepository.toggleBlock(brandId)
-                if(toggle){
+                 await this.brandRepository.updateBrand(brandId,{isBlocked:!brandExisting.isBlocked})
                     return {
                         status:200,
                         message:'Brand toggled successfully'
-                    }
-                }else{
-                    return {
-                        status:401,
-                        message:'Error toggling status'
-                    }
-                }
+                    }                
             }else{
                 return{
                     status:400,
@@ -92,6 +85,30 @@ class brandUsecase{
             return {
                 status:500,
                 message:'Error Toggling Block'
+            }
+        }
+    }
+
+    async updateBrand(brandId:string, brandData:Partial<Obrand>){
+        try {
+            const brandExisting = await this.brandRepository.fetchBrand(brandId)
+            if(brandExisting){
+                await this.brandRepository.updateBrand(brandId,brandData)
+                return{
+                        status:200,
+                        message:'Brand updated successfully'
+                }
+            }else{
+                return {
+                    status:401,
+                    message:"Brand Not Found"
+                }
+            }
+        } catch (error) {
+            console.log(error);
+            return{
+                status:500,
+                message:"Error Updating Brand"
             }
         }
     }

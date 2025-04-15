@@ -6,7 +6,7 @@ class brandRepository{
 
     async addBrand(brand:brand){
         try {
-            const newBrand = new brandModel({name:brand.brandName})
+            const newBrand = new brandModel({name:brand.name})
             const save = await newBrand.save()
             return save as Obrand | false
         } catch (error) {
@@ -66,6 +66,20 @@ class brandRepository{
             return null
         }
     }
+
+    async updateBrand(brandId:string,updatedData:Partial<Obrand>){
+        try {
+            const updateBrand = await brandModel.findByIdAndUpdate(
+                brandId,
+                {$set:updatedData}
+            )
+            return updateBrand
+        } catch (error) {
+            console.log(error);
+            return null
+        }
+    }
+
 }
 
 export default brandRepository
