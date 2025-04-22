@@ -41,7 +41,7 @@ class BrandController{
         }
     }
 
-    async update(req:Request, res:Response){
+    async updateBrand(req:Request, res:Response){
         try {
             const {brandId,brandData } = req.body
             const response = await this.brandUsecase.updateBrand(brandId,brandData)

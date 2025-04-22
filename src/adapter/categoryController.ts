@@ -38,6 +38,19 @@ class CategoryController {
         }
     }
 
+    async updateCategory(req:Request,res:Response){
+        try {
+            console.log(req.body);
+            const {categoryId,categoryData} = req.body
+            const response = await this.categoryUseCase.updateCategory(categoryId,categoryData)
+            res.status(response.status).json({message:response.message})
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({message:"Error Updating Category"
+            })
+        }
+    }
+
 }
 
 export default CategoryController;

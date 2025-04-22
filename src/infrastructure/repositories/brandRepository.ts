@@ -10,7 +10,7 @@ class brandRepository{
             const save = await newBrand.save()
             return save as Obrand | false
         } catch (error) {
-            console.log(error);
+            console.error(error);
             return false
         }
     }
@@ -18,9 +18,9 @@ class brandRepository{
     async toggleBlock(brandId:string){
         try {
             const brand = await brandModel.findOne({_id:brandId})
-            console.log(brand);
+            console.error(brand);
             if(brand){
-                console.log(brand.isBlocked);
+                console.error(brand.isBlocked);
                 brand.isBlocked = !brand.isBlocked
                 const status = await brand.save() 
                 return status 
@@ -28,7 +28,7 @@ class brandRepository{
                 return null
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
             return false
         }
     }
@@ -38,7 +38,7 @@ class brandRepository{
             const brand = await brandModel.findById({_id:brandId})
             return brand  
         } catch (error) {
-            console.log(error);
+            console.error(error);
             return null
         }
     }
@@ -52,7 +52,7 @@ class brandRepository{
                 return false
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
             return true
         }
     }
@@ -62,7 +62,7 @@ class brandRepository{
     const brands = await brandModel.find({})
     return brands            
         } catch (error) {
-            console.log(error);
+            console.error(error);
             return null
         }
     }
@@ -75,7 +75,7 @@ class brandRepository{
             )
             return updateBrand
         } catch (error) {
-            console.log(error);
+            console.error(error);
             return null
         }
     }

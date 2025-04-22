@@ -35,7 +35,7 @@ async getCategory(){
 
 async addCategory(category:category){
     try {
-        const isExisting = await this.categoryRepository.searchCategory(category.categoryName)
+        const isExisting = await this.categoryRepository.fetchCategoryByName(category.categoryName)
         let status:Icategory | false
         if(isExisting){
             status = false
@@ -65,7 +65,7 @@ async addCategory(category:category){
 
 async toggleBlock(categoryId:string){
     try {
-        const isExisting = await this.categoryRepository.getCategory(categoryId)
+        const isExisting = await this.categoryRepository.getCategoryById(categoryId)
         if(isExisting){
             const response = await this.categoryRepository.toggleBlock(categoryId)
             if(response){
@@ -91,6 +91,30 @@ async toggleBlock(categoryId:string){
         return {
             status:500,
             message:'Failed to toggle block'
+        }
+    }
+}
+
+async updateCategory(categoryId:string,categoryData:Partial<Icategory>){
+    try {
+        const isExisting = await this.categoryRepository.getCategoryById(categoryId)
+        if(isExisting){
+            await this.categoryRepository.updateCategory(categoryId,categoryData)
+            return {
+                status:200,
+                message:'Category Updated Successfully'
+            }
+        }else{
+            return {
+                status:401,
+                message:'Category Not Found'
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        return {
+            status:500,
+            message:"Error Updating Category"
         }
     }
 }

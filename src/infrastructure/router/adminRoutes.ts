@@ -47,7 +47,7 @@ const categoryController = new CategoryController(categoryUsecase)
 adminRoutes.get('/category',(req:Request,res)=>{categoryController.getCategory(req,res)})
 adminRoutes.post('/category',(req:Request,res)=>{categoryController.addCategory(req,res)})
 adminRoutes.put('/category',(req:Request,res)=>{categoryController.toggleBlock(req,res)})
-adminRoutes.patch('/category',(req:Request,res)=>{categoryController})
+adminRoutes.patch('/category',(req:Request,res)=>{categoryController.updateCategory(req,res)})
 
 //Brand Management Routes
 
@@ -58,6 +58,7 @@ const brandController    = new BrandController(brandUseCase)
 adminRoutes.get('/brand',(req:Request,res)=>{brandController.getBrand(req,res)})
 adminRoutes.post('/brand',(req:Request,res)=>{brandController.addBrand(req,res)})
 adminRoutes.put('/brand',(req:Request,res)=>{brandController.toggleBlock(req,res)})
+adminRoutes.patch('/brand',(req:Request,res)=>{brandController.updateBrand(req,res)})
 
 
 

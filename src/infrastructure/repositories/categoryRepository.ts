@@ -1,4 +1,4 @@
-import { category } from "../../domain/category";
+import { category, Icategory } from "../../domain/category";
 import categoryModel from "../database/categoryModel"
 
 class categoryRepository{
@@ -9,11 +9,11 @@ class categoryRepository{
     const categoryList = await categoryModel.find({})
     return categoryList        
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
     }
 
-    async searchCategory(category:string){
+    async fetchCategoryByName(category:string){
         try {
             const search = await categoryModel.findOne({name:category})            
             if(search){
@@ -22,7 +22,7 @@ class categoryRepository{
                 return false
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
             return false
         }
     }
@@ -37,7 +37,7 @@ try {
         return false
     }
 } catch (error) {
-    console.log(error)
+    console.error(error)
     return false
 }
 }
@@ -52,17 +52,32 @@ async toggleBlock(categoryId:string){
         return status
         
     } catch (error) {
-        console.log(error);
+        console.error(error);
         return false
     }
 }
 
-async getCategory(categoryId:string){
+async getCategoryById(categoryId:string){
     try {
          const category = await categoryModel.findById({_id:categoryId})
         return category as category | null
     } catch (error) {
-        console.log(error);
+        console.error(error);
+        return null
+    }
+}
+
+async updateCategory(categoryId:string,updatedData:Partial<Icategory>){
+    try {
+   
+        const updateCategory = await categoryModel.findByIdAndUpdate(
+            categoryId,
+            {$set:updatedData}
+
+        ) 
+        return updateCategory        
+    } catch (error) {
+        console.error(error);
         return null
     }
 }
